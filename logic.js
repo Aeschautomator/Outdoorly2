@@ -10,10 +10,19 @@ var config = {
 firebase.initializeApp(config);
 
 var map;
-
-var mapUrl = "https://maps.googleapis.com/maps/api/geocode/json?address=3461+Corley+Home+Drive,+Richmond,+VA&key=AIzaSyB8KmcbXCn9lulhHKjc593b5nskOQLDAIw";
+var address;
+$("#submitHome").on("click", function(){
+  event.preventDefault();
+  address = $("#searchBar").val().trim();
+  address = address.replace(/ /g, "+");
+  window.location.href = "maps_stuff.html";
+  localStorage.setItem("address", address);
+});
+address = localStorage.getItem("address");
+var mapUrl = "https://maps.googleapis.com/maps/api/geocode/json?address=" + address + "&key=AIzaSyB8KmcbXCn9lulhHKjc593b5nskOQLDAIw";
 
 function initMap() {
+    console.log(address);
     $.ajax({
     url: mapUrl,
     method: "GET"
@@ -22,7 +31,7 @@ function initMap() {
     var lng = response.results[0].geometry.location.lng;
     map = new google.maps.Map(document.getElementById("map"), {
         center: { lat: lat, lng: lng },
-        zoom: 8
+        zoom: 13
     });
 });
 }
