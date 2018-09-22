@@ -35,3 +35,11 @@ $(document).on("click", "#apod_img_id", function(){
 //     alert("clicked");
 // });
 
+function validateForm() {
+  var x = document.forms["myForm"]["fname"].value;
+  if (x == "") {
+      alert("Name must be filled out");
+      return false;
+  }
+}
+
