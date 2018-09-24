@@ -70,11 +70,6 @@ $(document).on("click", "#apod_img_id", function(){
     $("#apod_img_id").wrap("<a href='apod.html'></a>");
 });
 
-<<<<<<< HEAD:javascript/logic.js
-// $("#apod_image_id").click(function() {
-//     alert("clicked");
-// });
-
 function validateForm() {
   var x = document.forms["myForm"]["fname"].value;
   if (x == "") {
@@ -83,5 +78,4 @@ function validateForm() {
   }
 }
 
-=======
->>>>>>> master:logic.js
+
