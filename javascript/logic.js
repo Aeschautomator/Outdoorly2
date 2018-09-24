@@ -31,20 +31,23 @@ function initMap() {
 }).then(function (response) {
     lat = response.results[0].geometry.location.lat;
     lng = response.results[0].geometry.location.lng;
+    localStorage.setItem("lat", lat);
+    localStorage.setItem("lng", lng);
     map = new google.maps.Map(document.getElementById("map"), {
         center: { lat: lat, lng: lng },
         zoom: 13
     });
 });
 }
-
-var weathURL =  "https://cors.io/?https://api.darksky.net/forecast/c9c4b9925dddceaf1c4375befa199c7b" + lat + "," + lng;
+lat = localStorage.getItem("lat");
+lng = localStorage.getItem("lng");
+var weathURL =  "https://cors.io/?https://api.darksky.net/forecast/c9c4b9925dddceaf1c4375befa199c7b/" + lat + "," + lng;
 console.log(weathURL);
 $.ajax({
   url: weathURL,
   method: "GET"
 }).then(function (response){
-  console.log(JSON.parse(response));
+  var parsedResponse = JSON.parse(response);
 });
 
 
