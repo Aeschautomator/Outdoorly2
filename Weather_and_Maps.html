@@ -45,13 +45,10 @@
 
     </div>
     <div class="col-md-4">
-        <div class="input-group mb-4">
-            <input type="text" class="form-control" placeholder="enter zip" aria-label="Recipient's zipcode" aria-describedby="button-addon2">
-            <div class="input-group-append">
-              <button class="btn btn-outline-secondary" type="button" id="button-addon2">Search</button>
-            </div>
-          </div>
-    </div>
+       <form name="myForm" action="/action_page.php" onsubmit="return validateForm()" method="post">
+Search by address<input type="text" name="fname">
+<input type="submit" value="Submit">
+</form>
  <div class="col-md-10">
  
  

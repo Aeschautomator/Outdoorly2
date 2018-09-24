@@ -2,9 +2,25 @@
 <html>
 <head>
  <meta charset="utf-8">
+ <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+ <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+ <link rel="stlyesheet" href="style/style.css">
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
- <title>Example APOD call</title>
+ <title>Nasa Picture of the Day</title>
 </head>
+
+<style>
+        body{
+          background-image: url("images/background.jpg");
+        }
+        .container{
+            margin-top: 20px;
+        }
+        #apod_img_id{
+           align-items: center ;
+
+        }
+      </style>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
      <a class="navbar-brand" href="index.html"><i class="far fa-moon"></i>Outdoorly</i>
@@ -20,10 +36,10 @@
                   
              <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        click me for more choices
+                       Navigation
           </a>
          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-             <a class="dropdown-item" href="index2.html">Stars!</a>
+             <a class="dropdown-item" href="index.html">Home</a>
              <a class="dropdown-item" href="#">Weather stuff</a>
                <a class="dropdown-item" href="#">Coming Soon!</a>
                </div>
@@ -35,20 +51,25 @@
                   <button id="submitHome" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                 </form>
               </nav>
- <b>API URL:</b>
- <pre id="reqObject"></pre>
+
+  <div class="container">        
 
 
+ <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+                <h3 id="apod_title"></h3>
  <img id="apod_img_id" width="250px"/>
 
  <iframe id="apod_vid_id" type="text/html" width="640" height="385" frameborder="0"></iframe>
  <p id="copyright"></p>
 
- <h3 id="apod_title"></h3>
+ 
  <p id="apod_explaination"></p>
  <br/>
- <b>Return Object:</b>
- <pre id="returnObject"></pre>
- <script src="logic.js"></script>
+
+ <script src="javascript/nasa_APOD_API.js"></script>
+</div>  
+</div>
+</div>  
 </body>
 </html>
