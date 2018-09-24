@@ -15,26 +15,37 @@ $("#submitHome").on("click", function(){
   event.preventDefault();
   address = $("#searchBar").val().trim();
   address = address.replace(/ /g, "+");
-  window.location.href = "maps_stuff.html";
+  window.location.href = "Weather_and_Maps.html";
   localStorage.setItem("address", address);
 });
 address = localStorage.getItem("address");
-var mapUrl = "https://maps.googleapis.com/maps/api/geocode/json?address=" + address + "&key=AIzaSyB8KmcbXCn9lulhHKjc593b5nskOQLDAIw";
 
+var mapUrl = "https://maps.googleapis.com/maps/api/geocode/json?address=" + address + "&key=AIzaSyB8KmcbXCn9lulhHKjc593b5nskOQLDAIw";
+var lat = "";
+var lng = "";
 function initMap() {
     console.log(address);
     $.ajax({
     url: mapUrl,
     method: "GET"
 }).then(function (response) {
-    var lat = response.results[0].geometry.location.lat;
-    var lng = response.results[0].geometry.location.lng;
+    lat = response.results[0].geometry.location.lat;
+    lng = response.results[0].geometry.location.lng;
     map = new google.maps.Map(document.getElementById("map"), {
         center: { lat: lat, lng: lng },
         zoom: 13
     });
 });
 }
+
+var weathURL =  "https://cors.io/?https://api.darksky.net/forecast/c9c4b9925dddceaf1c4375befa199c7b" + lat + "," + lng;
+console.log(weathURL);
+$.ajax({
+  url: weathURL,
+  method: "GET"
+}).then(function (response){
+  console.log(JSON.parse(response));
+});
 
 
 var url = "https://api.nasa.gov/planetary/apod?api_key=6NprwCeXJI4VjBtN7Sgn2stKHJZGCiUF6JIToxzr";
