@@ -70,3 +70,12 @@ $(document).on("click", "#apod_img_id", function(){
     $("#apod_img_id").wrap("<a href='apod.html'></a>");
 });
 
+function validateForm() {
+  var x = document.forms["myForm"]["fname"].value;
+  if (x == "") {
+      alert("Name must be filled out");
+      return false;
+  }
+}
+
+
