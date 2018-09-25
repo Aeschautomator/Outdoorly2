@@ -15,7 +15,7 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
       crossorigin="anonymous"></script>
   <script src="https://www.gstatic.com/firebasejs/5.5.0/firebase.js"></script>
-  <link rel="stylesheet" href="style/style.css">
+  <link rel="stylesheet" href="Style/style.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
   
@@ -80,6 +80,7 @@
         Search by address<input id="searchBar" type="text" name="fname">
         <input id="submitHome" type="submit" value="Submit">
       </form>
+      <div class="row">
       <div class="col-md-10">
         <div id="map"></div>
         <div id="weather"></div>
@@ -88,16 +89,26 @@
 
       </div>
     </div>
-    <footer class="page-footer footer-expand-lg bg-dark font-small blue">
+    </div>
+    </div>
+   
+    <div class="row">
+      <div class="col-md-12">
+
+      
+      <footer class="page-footer footer-expand-lg bg-dark font-small blue">
 
         
       <div class="footer-copyright text-right py-3">© 2018
-        <a class="navbar-brand" href="https://darksky.net/poweredby/"> <img src= "images/footer.png" height="30px"></a>
+        
           
        
       </div>
+      
     
     </footer>
+    </div>
+    </div>
     <script src="javascript/logic.js"></script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8KmcbXCn9lulhHKjc593b5nskOQLDAIw&callback=initMap"></script>
 </body>

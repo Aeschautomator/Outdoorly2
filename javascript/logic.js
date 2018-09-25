@@ -8,12 +8,16 @@ var config = {
   messagingSenderId: "982019906690"
 };
 firebase.initializeApp(config);
+var database = firebase.database();
 
 var map;
 var address;
 $("#submitHome").on("click", function(){
   event.preventDefault();
   address = $("#searchBar").val().trim();
+  database.ref().push({
+    address: address
+});
   address = address.replace(/ /g, "+");
   window.location.href = "Weather_and_Maps.html";
   localStorage.setItem("address", address);
@@ -41,6 +45,7 @@ function initMap() {
 }
 lat = localStorage.getItem("lat");
 lng = localStorage.getItem("lng");
+
 var weathURL =  "https://cors.io/?https://api.darksky.net/forecast/c9c4b9925dddceaf1c4375befa199c7b/" + lat + "," + lng;
 console.log(weathURL);
 $.ajax({
