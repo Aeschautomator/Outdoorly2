@@ -64,7 +64,7 @@
   <div class="row">
     <div class="col-md-2">
       <div>
-          <table id="searchHistory" style="width:100%">
+          <table class="table rounded table-sm table-hover table-dark" id="searchHistory" style="width:100%; margin-left:10px">
             <tr>
               <td>
                 Recent Searches<hr>
@@ -74,9 +74,12 @@
       </div>
     </div>
     <div class="col-md-4">
-      <form name="myForm" action="/action_page.php" onsubmit="return validateForm()" method="post">
-        Search by address<input id="searchBar" type="text" name="fname">
+        
+      <form class="form-inline" name="myForm" action="/action_page.php" onsubmit="return validateForm()" method="post">
+         <input id="searchBar" type="text" name="fname" placeholder="Enter Address">
+        
         <input id="submitHome" type="submit" value="Submit">
+     
       </form>
       <div class="row">
       <div class="col-md-10">
