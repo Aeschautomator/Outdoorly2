@@ -12,46 +12,60 @@ var database = firebase.database();
 
 var map;
 var address;
-$("#submitHome").on("click", function(){
+$("#submitHome").on("click", function () {
   event.preventDefault();
   address = $("#searchBar").val().trim();
   database.ref().push({
     address: address
-});
+  });
   address = address.replace(/ /g, "+");
   window.location.href = "Weather_and_Maps.html";
   localStorage.setItem("address", address);
 });
 address = localStorage.getItem("address");
+database.ref().on("child_added", function (childSnapshot) {
+  $("#searchHistory").append(`
+    <tr>
+    <td id="mapLink">
+      <a href="Weather_and_Maps.html">${childSnapshot.val().address}</a>
+      <hr>
+      </td>
+    </tr>
+  `)
+});
+
+$(document).on("click", "#mapLink", function(event){
+  localStorage.setItem("address", $(this).text());
+});
 
 var mapUrl = "https://maps.googleapis.com/maps/api/geocode/json?address=" + address + "&key=AIzaSyB8KmcbXCn9lulhHKjc593b5nskOQLDAIw";
 var lat = "";
 var lng = "";
 function initMap() {
-    console.log(address);
-    $.ajax({
+  console.log(address);
+  $.ajax({
     url: mapUrl,
     method: "GET"
-}).then(function (response) {
+  }).then(function (response) {
     lat = response.results[0].geometry.location.lat;
     lng = response.results[0].geometry.location.lng;
     localStorage.setItem("lat", lat);
     localStorage.setItem("lng", lng);
     map = new google.maps.Map(document.getElementById("map"), {
-        center: { lat: lat, lng: lng },
-        zoom: 13
+      center: { lat: lat, lng: lng },
+      zoom: 13
     });
-});
+  });
 }
 lat = localStorage.getItem("lat");
 lng = localStorage.getItem("lng");
 
-var weathURL =  "https://cors.io/?https://api.darksky.net/forecast/c9c4b9925dddceaf1c4375befa199c7b/" + lat + "," + lng;
+var weathURL = "https://cors.io/?https://api.darksky.net/forecast/c9c4b9925dddceaf1c4375befa199c7b/" + lat + "," + lng;
 console.log(weathURL);
 $.ajax({
   url: weathURL,
   method: "GET"
-}).then(function (response){
+}).then(function (response) {
   var parsedResponse = JSON.parse(response);
 });
 
@@ -60,40 +74,40 @@ var url = "https://api.nasa.gov/planetary/apod?api_key=6NprwCeXJI4VjBtN7Sgn2stKH
 
 
 $.ajax({
- url: url,
- success: function(result){
- if("copyright" in result) {
-   $("#copyright").text("Image Credits: " + result.copyright);
- }
- else {
-   $("#copyright").text("Image Credits: " + "Public Domain");
- }
+  url: url,
+  success: function (result) {
+    if ("copyright" in result) {
+      $("#copyright").text("Image Credits: " + result.copyright);
+    }
+    else {
+      $("#copyright").text("Image Credits: " + "Public Domain");
+    }
 
- if(result.media_type == "video") {
-   $("#apod_img_id").css("display", "none");
-   $("#apod_vid_id").attr("src", result.url);
- }
- else {
-   $("#apod_vid_id").css("display", "none");
-   $("#apod_img_id").attr("src", result.url);
- }
- $("#reqObject").text(url);
- $("#returnObject").text(JSON.stringify(result, null, 4));
- $("#apod_explaination").text(result.explanation);
- $("#apod_title").text(result.title);
-}
+    if (result.media_type == "video") {
+      $("#apod_img_id").css("display", "none");
+      $("#apod_vid_id").attr("src", result.url);
+    }
+    else {
+      $("#apod_vid_id").css("display", "none");
+      $("#apod_img_id").attr("src", result.url);
+    }
+    $("#reqObject").text(url);
+    $("#returnObject").text(JSON.stringify(result, null, 4));
+    $("#apod_explaination").text(result.explanation);
+    $("#apod_title").text(result.title);
+  }
 
 
 });
-$(document).on("click", "#apod_img_id", function(){
-    $("#apod_img_id").wrap("<a href='apod.html'></a>");
+$(document).on("click", "#apod_img_id", function () {
+  $("#apod_img_id").wrap("<a href='apod.html'></a>");
 });
 
 function validateForm() {
   var x = document.forms["myForm"]["fname"].value;
   if (x == "") {
-      alert("Name must be filled out");
-      return false;
+    alert("Name must be filled out");
+    return false;
   }
 }
 
