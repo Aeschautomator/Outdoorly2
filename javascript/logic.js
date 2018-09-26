@@ -24,7 +24,7 @@ $("#submitHome").on("click", function () {
 });
 address = localStorage.getItem("address");
 database.ref().on("child_added", function (childSnapshot) {
-  $("#searchHistory").append(`
+  $("#searchHistory").prepend(`
     <tr>
     <td id="mapLink">
       <a href="Weather_and_Maps.html">${childSnapshot.val().address}</a>
