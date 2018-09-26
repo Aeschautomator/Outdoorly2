@@ -53,6 +53,18 @@ $.ajax({
   method: "GET"
 }).then(function (response){
   var parsedResponse = JSON.parse(response);
+  console.log(parsedResponse);
+  $("#tempHigh").text(parsedResponse.daily.data[0].apparentTemperatureHigh);
+  $(".tempLow").text(parsedResponse.daily.data[0].apparentTemperatureLow);
+  var weatherAddress = address.replace(/"+"/g, " ");
+  $("#weatherResponse").append(`
+  <tr> 
+  <td> ${weatherAddress}</td>
+  <td> ${parsedResponse.daily.data[0].apparentTemperatureHigh}</td>
+  <td> ${parsedResponse.daily.data[0].apparentTemperatureLow}</td>
+  <td> ${parsedResponse.daily.data[0].humidity}</td>
+  </tr>
+  `)
 });
 
 
