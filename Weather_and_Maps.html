@@ -1,6 +1,3 @@
-<!DOCTYPE html>
-<html>
-
 <head>
   <title>Outdoorly</title>
   <meta charset="UTF-8">
@@ -14,12 +11,11 @@
     crossorigin="anonymous">
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
     crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+    crossorigin="anonymous">
   <script src="https://www.gstatic.com/firebasejs/5.5.0/firebase.js"></script>
   <link rel="stylesheet" href="Style/style.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-
 
 </head>
 <style>
@@ -39,16 +35,6 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
-      <!-- <ul class="navbar-nav">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Stars</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Weather</a>
-      </li> -->
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav">
           <li class="nav-item active">
@@ -56,7 +42,6 @@
               <span class="sr-only">(current)</span>
             </a>
           </li>
-
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true"
               aria-expanded="false">
@@ -71,85 +56,73 @@
         </ul>
       </div>
     </div>
-
   </nav>
-  <div class="container">
-    <br>
-
-
-    <div class="row">
-      <div class="col-md-2">
-
-      </div>
-      <div class="col-md-4">
-        <form name="myForm" action="/action_page.php" onsubmit="return validateForm()" method="post">
-          Search by address
-          <input id="searchBar" type="text" name="fname">
-          <input id="submitHome" type="submit" value="Submit">
-        </form>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-2">
-
-      </div>
-      <div class="col-md-10">
-        <div id="map"></div>
-
-
-
-
+  <br>
+  <div class="row">
+    <div class="col-md-2" style="overflow-y: hidden; max-height: 750px">
+      <div>
+          <table class="table rounded table-sm table-hover table-dark" style="width:100%; margin-left:10px">
+          <tr>
+            <td>
+              Recent Searches
+              <hr>
+            </td>
+          </tr>
+        </table>
+        <table class="table rounded table-sm table-hover table-dark" id="searchHistory" style="width:100%; margin-left:10px">
+          </tr>
+        </table>
       </div>
     </div>
-    <br>
-    <br>
-
-    
-    <div class="row">
-      <div class="col-md-2">
-
-      </div>
-      <div class="col-md-10">
-      <div class="card">
-        <div class="card-body">
-          
-
-            
-              <table id="weatherResponse">
-
-                <th>Search Location</th>
-
-                <th>Temperature High</th>
-
-                <th>Temperature Low</th>
-
-                <th>Humidity</th>
-
-
-              </table>
-            </div>
-          </div>
+    <div class="col-md-8">
+      <form name="myForm" action="/action_page.php" onsubmit="return validateForm()" method="post">
+        Search by address<input id="searchBar" type="text" name="fname">
+        <input id="submitHome" type="submit" value="Submit">
+     
+      </form>
+      <div class="row">
+        <div class="col-md-10">
+          <div id="map"></div>
+          <div id="weather"></div>
         </div>
       </div>
     </div>
   </div>
-
-
-  <footer class="fixed-bottom page-footer footer-expand-lg bg-dark text-white">
-
-
-    <div class="footer-copyright text-center py-3">© 2018
-
-
-
+  <div class="row">
+    <div class="col-md-2">
     </div>
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-body">
+          <table id="weatherResponse">
+            <th>Search Location</th>
+            <th>Temperature High</th>
+            <th>Temperature Low</th>
+            <th>Humidity</th>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+        <footer class="fixed-bottom page-footer footer-expand-lg bg-dark text-white">
 
 
-  </footer>
-  
-
-  <script src="javascript/logic.js"></script>
-  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8KmcbXCn9lulhHKjc593b5nskOQLDAIw&callback=initMap"></script>
+            <div class="footer-copyright text-center py-3">© 2018
+        
+        
+        
+            </div>
+        
+        
+          </footer>
+    </div>
+    
+    <script src="javascript/logic.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8KmcbXCn9lulhHKjc593b5nskOQLDAIw&callback=initMap"></script>
 </body>
 
 </html>
