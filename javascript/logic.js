@@ -119,11 +119,19 @@ $(document).on("click", "#apod_img_id", function () {
 });
 
 function validateForm() {
-  var x = document.forms["myForm"]["fname"].value;
+  var x = document.forms["myForm"]["fname"]['searchBar'].value;
   if (x == "") {
     alert("Name must be filled out");
     return false;
   }
 }
 
+function checkforblank () {
+  if(document.getElementById('searchBar').value == "") {
+    alert("please enter an address");
+    document.getElementById('searchBar').style.bordercolor = "red";
+    return false;
+   
+  }
+}
 
