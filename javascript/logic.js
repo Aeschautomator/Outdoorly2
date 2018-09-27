@@ -14,11 +14,16 @@ var map;
 var address;
 $("#submitHome").on("click", function () {
   event.preventDefault();
-  address = $("#searchBar").val().trim();
-  database.ref().push({
-    address: address
-  });
-  address = address.replace(/ /g, "+");
+  inputAddress = $("#searchBar").val().trim();
+  if (inputAddress === "") {
+    return;
+  } else {
+    address = inputAddress;
+    database.ref().push({
+      address: address
+    })
+  };
+  // address = address.replace(/ /g, "+");
   window.location.href = "Weather_and_Maps.html";
   localStorage.setItem("address", address);
 });
@@ -28,13 +33,12 @@ database.ref().on("child_added", function (childSnapshot) {
     <tr>
     <td id="mapLink">
       <a href="Weather_and_Maps.html">${childSnapshot.val().address}</a>
-      <hr>
       </td>
     </tr>
   `)
 });
 
-$(document).on("click", "#mapLink", function(event){
+$(document).on("click", "#mapLink", function (event) {
   localStorage.setItem("address", $(this).text());
 });
 
@@ -42,7 +46,6 @@ var mapUrl = "https://maps.googleapis.com/maps/api/geocode/json?address=" + addr
 var lat = "";
 var lng = "";
 function initMap() {
-  console.log(address);
   $.ajax({
     url: mapUrl,
     method: "GET"
@@ -61,17 +64,27 @@ lat = localStorage.getItem("lat");
 lng = localStorage.getItem("lng");
 
 var weathURL = "https://cors.io/?https://api.darksky.net/forecast/c9c4b9925dddceaf1c4375befa199c7b/" + lat + "," + lng;
-console.log(weathURL);
 $.ajax({
   url: weathURL,
   method: "GET"
 }).then(function (response) {
   var parsedResponse = JSON.parse(response);
+  console.log(parsedResponse);
+  $("#tempHigh").text(parsedResponse.daily.data[0].apparentTemperatureHigh);
+  $(".tempLow").text(parsedResponse.daily.data[0].apparentTemperatureLow);
+  var weatherAddress = address;
+  $("#weatherResponse").append(`
+  <tr> 
+  <td> ${weatherAddress}</td>
+  <td> ${parsedResponse.daily.data[0].apparentTemperatureHigh}</td>
+  <td> ${parsedResponse.daily.data[0].apparentTemperatureLow}</td>
+  <td> ${parsedResponse.daily.data[0].humidity}</td>
+  </tr>
+  `)
 });
 
-
+//dynamically add the NASA picture of the day to APOD.html page
 var url = "https://api.nasa.gov/planetary/apod?api_key=6NprwCeXJI4VjBtN7Sgn2stKHJZGCiUF6JIToxzr";
-
 
 $.ajax({
   url: url,
@@ -99,6 +112,8 @@ $.ajax({
 
 
 });
+
+//function to change astronomy picture of the day to a link to APOD page
 $(document).on("click", "#apod_img_id", function () {
   $("#apod_img_id").wrap("<a href='apod.html'></a>");
 });
